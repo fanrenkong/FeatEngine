@@ -12,8 +12,6 @@ nfevalmax = 1E3; % Max function evaluation
 runTimes = 30; % Total run times
 
 %% Run
-fprintf('BEGIN TO RUN [%s] IN [%s] DATASET WITH [%s] AS CLASSIFIER\n', ...
-        func2str(EC), class(Problem), func2str(CA));
 for run = 1 : runTimes
     %% Classification Algorithm
     CA = @fitcknn; 
@@ -23,7 +21,9 @@ for run = 1 : runTimes
 
     %% Evolutionary Computation
     EC = @SMMOEAFS;
-    
+    fprintf('BEGIN TO RUN [%s] IN [%s] DATASET WITH [%s] AS CLASSIFIER (%d / %d)\n', ...
+        func2str(EC), class(Problem), func2str(CA), run, runTimes);
+        
     [result, CPUTime] = EC(N, Problem, CA, tradeOff);
     fprintf('------------------------ RUN [%d / %d] RESULTS --------------------------------\n', ...
         run, runTimes);
